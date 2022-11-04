@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 
-export default function AddNewButton() {
+export default function AddNewButton({setSelectorOpen}) {
   return (
-    <View style={styles.button}>
+    <Pressable style={styles.button} onPress={() => setSelectorOpen(true)}>
       <Text style={styles.buttontext}>add more stations</Text>
-    </View>
+    </Pressable>
   )
 }
 

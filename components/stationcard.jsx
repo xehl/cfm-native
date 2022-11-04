@@ -1,11 +1,30 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, Pressable, Image, View } from "react-native";
 import { Divider } from 'react-native-paper';
+import TrackPlayer from "react-native-track-player";
 
+export default function StationCard({ station, playing, setPlaying, userPause, setUserPause }) {
 
-export default function StationCard({ station }) {
+  function handleCardClick(e) {
+    console.log(playing)
+    console.log(station)
+
+    // unload station if user clicks the currently playing card
+    if (playing === station) {
+      if (userPause === false) {
+        TrackPlayer.pause()
+        setUserPause(true)
+      }
+      else {
+        TrackPlayer.play()
+        setUserPause(false)
+      }
+    }
+
+    setPlaying(station)
+  }
 
   return (
-    <View style={styles.card}>
+    <Pressable style={styles.card} onPress={handleCardClick}>
       <View style={styles.cardcontent}>
         <Image
           style={styles.logo}
@@ -17,7 +36,7 @@ export default function StationCard({ station }) {
           <Text style={styles.collegetext}>{station.college_name}</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   )
 }
 
@@ -58,7 +77,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     height: 75,
-    width: 75,
+    width: 80,
     margin: 20,
     resizeMode: "contain"
   }
