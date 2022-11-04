@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback
 } from "react-native";
+import ModalCard from "./modalcard";
 
 export default function SelectorModal({selectorOpen, setSelectorOpen}) {
   return (
@@ -31,6 +32,7 @@ export default function SelectorModal({selectorOpen, setSelectorOpen}) {
         <TouchableWithoutFeedback>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Placeholder for selector</Text>
+            <ModalCard />
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setSelectorOpen(!selectorOpen)}
@@ -39,7 +41,6 @@ export default function SelectorModal({selectorOpen, setSelectorOpen}) {
               </Pressable>
             </View>
             </TouchableWithoutFeedback>
-
           </View>
         </TouchableOpacity>
     </Modal>
