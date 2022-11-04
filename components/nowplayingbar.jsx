@@ -38,17 +38,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
     borderRadius: 5,
+    width: "80%",
+    height: 60,
     paddingHorizontal: 20,
     paddingVertical: 5,
   },
   nowplayingtext: {
     fontFamily: "ShareTechMono",
     fontSize: 16,
+    textAlign: "center",
   },
   stationlogo: {
     width: 50,
     height: 50,
     resizeMode: "contain",
-    marginRight: 10,
+    marginRight: 15,
   }
 });

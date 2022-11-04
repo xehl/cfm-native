@@ -102,7 +102,11 @@ export default function App() {
           </View>
         </ScrollView>
         <View style={styles.footerSpacer} />
-        <ToolBar setSelectorOpen={setSelectorOpen} setFaqOpen={setFaqOpen} />
+        <ToolBar
+          setSelectorOpen={setSelectorOpen}
+          setFaqOpen={setFaqOpen}
+          setUserPause={setUserPause}
+        />
       </LinearGradient>
     </View>
   );

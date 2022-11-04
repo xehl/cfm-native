@@ -34,7 +34,7 @@ export default function StationCard({ station, playing, setPlaying, userPause, s
           style={styles.logo}
           source={{uri: station.college_image}}
         />
-        <Divider style={{ width: 2, height: 120 }}/>
+        <Divider style={{ width: 1, height: 120 }}/>
         <View style={styles.textcontainer}>
           <Text style={styles.stationtext}>{station.call_sign} {station.broadcast_frequency}</Text>
           <Text style={styles.collegetext}>{station.college_name}</Text>

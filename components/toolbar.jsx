@@ -2,8 +2,21 @@ import { StyleSheet, View, Pressable } from "react-native";
 import { Feather } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
+import TrackPlayer from "react-native-track-player";
 
-export default function ToolBar({ setSelectorOpen, setFaqOpen }) {
+export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause }) {
+
+  function handlePause() {
+    TrackPlayer.pause()
+    setUserPause(true)
+  }
+  function handlePlay() {
+    TrackPlayer.play()
+    setUserPause(false)
+  }
+  function handleShuffle() {
+    console.log("shuffle")
+  }
   
   return (
     <View style={styles.headerbar}>
@@ -11,9 +24,15 @@ export default function ToolBar({ setSelectorOpen, setFaqOpen }) {
         <Pressable onPress={() => setSelectorOpen(true)}>
           <MaterialIcons name="dashboard-customize" size={24} color="white" />
         </Pressable>
-        <Feather name="shuffle" size={24} color="white" />
-        <FontAwesome name="play" size={24} color="white" />
-        <FontAwesome name="pause" size={24} color="white" />
+        <Pressable onPress={handleShuffle}>
+          <Feather name="shuffle" size={24} color="white" />
+        </Pressable>
+        <Pressable onPress={handlePlay}>
+          <FontAwesome name="play" size={24} color="white" />
+        </Pressable>
+        <Pressable onPress={handlePause}>
+          <FontAwesome name="pause" size={24} color="white" />
+        </Pressable>
         <Pressable onPress={() => setFaqOpen(true)}>
           <FontAwesome name="question-circle" size={24} color="white" />
         </Pressable>
