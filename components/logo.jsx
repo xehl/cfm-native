@@ -18,7 +18,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#2e2e2e",
-    alignSelf: "stretch"
+    alignSelf: "stretch",
+    borderBottomWidth: 1,
+    borderBottomColor: "#363636",
+    paddingBottom: 10,
+    marginTop: -5,
   },
   logotextlg: {
     fontFamily: "Monoton",

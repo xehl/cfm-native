@@ -1,30 +1,65 @@
-import { StyleSheet, Text, View } from "react-native";
-import { createBoxShadowValue } from "react-native-web/dist/cjs/exports/StyleSheet/preprocess";
-import { back } from "react-native/Libraries/Animated/Easing";
+import { StyleSheet, Text, View, Image } from "react-native";
+import { Divider } from 'react-native-paper';
+
 
 export default function StationCard({ station }) {
 
   return (
     <View style={styles.card}>
-      <Text style={styles.cardtext}>{station.call_sign} {station.broadcast_frequency}</Text>
-      <Text style={styles.cardtext}>{station.college_name}</Text>
+      <View style={styles.cardcontent}>
+        <Image
+          style={styles.logo}
+          source={{uri: station.college_image}}
+        />
+        <Divider style={{ width: 2, height: 120 }}/>
+        <View style={styles.textcontainer}>
+          <Text style={styles.stationtext}>{station.call_sign} {station.broadcast_frequency}</Text>
+          <Text style={styles.collegetext}>{station.college_name}</Text>
+        </View>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   card: {
-    height: 100,
-    width: "90%",
-    alignItems: "center",
-    justifyContent: "center",
+    height: 145,
+    width: "92%",
     backgroundColor: "white",
-    borderColor: "black",
-    borderWidth: 1,
     borderRadius: 8,
     marginVertical: 5,
+    justifyContent: "center",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
-  cardtext: {
+  cardcontent: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  textcontainer: {
+    alignSelf: "stretch",
+    justifyContent: "center",
+    width: 210,
+  },
+  stationtext: {
     fontFamily: "ShareTechMono",
+    fontSize: 24,
+    textAlign: "right"
+  },
+  collegetext: {
+    fontFamily: "ShareTechMono",
+    color: "#2e2e2e",
+    textAlign: "right"
+  },
+  logo: {
+    height: 75,
+    width: 75,
+    margin: 20,
+    resizeMode: "contain"
   }
 });

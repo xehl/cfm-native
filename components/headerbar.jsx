@@ -23,10 +23,15 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderBottomWidth: 1,
     height: 50,
+    marginTop: -5,
     alignSelf: "stretch",
-    backgroundColor: "#2e2e2e"
+    backgroundColor: "#2e2e2e",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
+    elevation: 5
   },
   toolbarcontainer: {
     display: "flex",
