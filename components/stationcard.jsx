@@ -4,6 +4,10 @@ import TrackPlayer from "react-native-track-player";
 
 export default function StationCard({ station, playing, setPlaying, userPause, setUserPause }) {
 
+  const greenIfPlaying = () => {
+    return (playing?.call_sign === station.call_sign) ? "#cefac8" : "white";
+  }
+
   function handleCardClick(e) {
     console.log(playing)
     console.log(station)
@@ -24,7 +28,7 @@ export default function StationCard({ station, playing, setPlaying, userPause, s
   }
 
   return (
-    <Pressable style={styles.card} onPress={handleCardClick}>
+    <Pressable style={[styles.card, {backgroundColor: greenIfPlaying()}]} onPress={handleCardClick}>
       <View style={styles.cardcontent}>
         <Image
           style={styles.logo}
@@ -44,7 +48,6 @@ const styles = StyleSheet.create({
   card: {
     height: 145,
     width: "92%",
-    backgroundColor: "white",
     borderRadius: 8,
     marginVertical: 5,
     justifyContent: "center",

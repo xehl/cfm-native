@@ -21,10 +21,10 @@ export default function NowPlayingBar({ playing }) {
 
 const styles = StyleSheet.create({
   npcontainer: {
-    height: 60,
+    height: 75,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "#2e2e2e",
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,
@@ -35,7 +35,11 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
   },
   nowplayingtext: {
     fontFamily: "ShareTechMono",
