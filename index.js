@@ -2,7 +2,6 @@ import { registerRootComponent } from "expo";
 import { AppRegistry, Platform } from "react-native";
 import App from "./App";
 import TrackPlayer from "react-native-track-player";
-
 TrackPlayer.registerPlaybackService(() => require("./service"));
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);

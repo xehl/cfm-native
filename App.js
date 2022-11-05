@@ -11,7 +11,7 @@ import FaqModal from "./components/faqmodal";
 import Logo from "./components/logo";
 import stations from "./stations";
 import TrackPlayer from "react-native-track-player";
-import { State } from "react-native-track-player";
+import { useTrackPlayerEvents, Event, State } from "react-native-track-player";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,7 +30,7 @@ export default function App() {
         console.log("track player initialized");
       })
       .catch(() => {});
-  });
+  }, []);
 
   // // make array of tracks to feed to player
   // let tracks = [];
@@ -55,19 +55,10 @@ export default function App() {
       // TrackPlayer.getQueue().then((res) => console.log(res));
     }
 
-    async (dispatch, getState) => {
-      try {
-        dispatch(playbackState(await TrackPlayer.getState()));
-        dispatch(playbackTrack(await TrackPlayer.getCurrentTrack()));
-      } catch (e) {
-        // The player is probably not yet initialized
-        // which means we don't have to update anything
-        console.log(e);
-      }
-    };
+    TrackPlayer.addEventListener(Event.PlaybackState, (e) => {
+      console.log(e);
+    });
   }, [playing]);
-
-  // TrackPlayer.pause();
 
   if (!fontsLoaded) {
     return null;

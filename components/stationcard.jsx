@@ -9,22 +9,24 @@ export default function StationCard({ station, playing, setPlaying, userPause, s
   }
 
   function handleCardClick(e) {
-    console.log(playing)
-    console.log(station)
+    // console.log(playing)
+    // console.log(station)
 
     // unload station if user clicks the currently playing card
     if (playing === station) {
       if (userPause === false) {
         TrackPlayer.pause()
         setUserPause(true)
+        setPlaying(null)
       }
       else {
         TrackPlayer.play()
         setUserPause(false)
       }
     }
-
-    setPlaying(station)
+    else {
+      setPlaying(station)
+    }
   }
 
   return (
