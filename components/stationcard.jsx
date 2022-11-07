@@ -2,10 +2,24 @@ import { StyleSheet, Text, Pressable, Image, View } from "react-native";
 import { Divider } from 'react-native-paper';
 import TrackPlayer from "react-native-track-player";
 
-export default function StationCard({ station, selectedStation, setSelectedStation, userPause, setUserPause }) {
+export default function StationCard({ station, selectedStation, setSelectedStation, userPause, setUserPause, playerState }) {
 
   const greenIfPlaying = () => {
-    return (selectedStation?.call_sign === station.call_sign) ? "#cefac8" : "white";
+
+    // return white if not playing
+    // if playing, return red if playerState = connecting
+    // return blue if playerState = buffering
+    // return #cefac8 if playerState = playing
+
+    if (selectedStation?.call_sign !== station.call_sign) return "white"
+    else {
+      console.log(playerState)
+      if (playerState === "connecting") return "#db8a8a"
+      if (playerState === "buffering" || playerState === "ready") return "#c9c9c9"
+      if(playerState === "playing") return "#cefac8"
+    }
+
+    // return (selectedStation?.call_sign === station.call_sign) ? "#cefac8" : "white";
   }
 
   function handleCardClick(e) {

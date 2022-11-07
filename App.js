@@ -23,17 +23,13 @@ export default function App() {
   const [faqOpen, setFaqOpen] = useState(false);
   const [selectedStation, setSelectedStation] = useState(null);
   const [userPause, setUserPause] = useState(false);
-  const [buffering, setBuffering] = useState(false);
-  const [audioPlaying, setAudioPlaying] = useState(false);
+  const [playerState, setPlayerState] = useState(null);
 
   useEffect(() => {
-    TrackPlayer.setupPlayer();
-    // .then(() => {
-    //   console.log("track player initialized");
-    // })
-    // .catch(() => {});
+    TrackPlayer.setupPlayer().catch(() => {});
     TrackPlayer.addEventListener(Event.PlaybackState, (e) => {
-      console.log(e);
+      console.log(e.state);
+      setPlayerState(e.state);
     });
   }, []);
 
@@ -91,6 +87,7 @@ export default function App() {
                 setSelectedStation={setSelectedStation}
                 userPause={userPause}
                 setUserPause={setUserPause}
+                playerState={playerState}
               />
             ))}
             <AddNewButton setSelectorOpen={setSelectorOpen} />
