@@ -1,10 +1,19 @@
 import { StyleSheet, View, Pressable, TextInput } from "react-native";
 import { Feather } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
-import { MaterialIcons } from '@expo/vector-icons'; 
 import TrackPlayer from "react-native-track-player";
+import { useState } from "react"
 
 export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause, query, setQuery }) {
+
+  const [showSearchBar, setShowSearchBar] = useState(false)
+
+  const toggleSearchBar = () => {
+    console.log(showSearchBar)
+    if (showSearchBar)
+      setShowSearchBar(false)
+    else setShowSearchBar(true)
+  }
 
   function handlePause() {
     TrackPlayer.pause()
@@ -20,8 +29,10 @@ export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause, que
   
   return (
     <View style={styles.outercontainer}>
-      <View style={styles.searchbar}>
+      <View style={[styles.searchbar, {display: showSearchBar ? "flex" : "none"}]}>
+      {/* <View style={[styles.searchbar]}> */}
         <TextInput
+          placeholder="search"
           style={styles.input}
           onChangeText={setQuery}
           value={query}
@@ -29,7 +40,8 @@ export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause, que
       </View>
       <View style={styles.headerbar}>
         <View style={styles.toolbarcontainer}>
-          <Pressable onPress={() => setSelectorOpen(true)}>
+          {/* <Pressable onPress={() => setSelectorOpen(true)}> */}
+          <Pressable onPress={toggleSearchBar}>
             <FontAwesome name="search" size={24} color="white" />
           </Pressable>
           <Pressable onPress={handleShuffle}>
@@ -57,7 +69,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: -1 },
+    shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,  
     elevation: 5,
@@ -78,7 +90,8 @@ const styles = StyleSheet.create({
   },
   searchbar: {
     height: 60,
-    backgroundColor: "white",
+    backgroundColor: "#2e2e2e",
+    borderBottomWidth: 1,
   },
   input: {
     height: 40,

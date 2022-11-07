@@ -60,7 +60,7 @@ export default function App() {
   }, [selectedStation]);
 
   useEffect(() => {
-    if (query.length === 0) setDisplayedStations(stations);
+    if (query === null || query.length === 0) setDisplayedStations(stations);
     else {
       setDisplayedStations(
         stations.filter((station) => {
@@ -97,6 +97,7 @@ export default function App() {
           <NowPlayingBar
             selectedStation={selectedStation}
             userPause={userPause}
+            playerState={playerState}
           />
           <View style={styles.cardcontainer}>
             {displayedStations.map((station) => (

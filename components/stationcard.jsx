@@ -5,7 +5,6 @@ import TrackPlayer from "react-native-track-player";
 export default function StationCard({ station, selectedStation, setSelectedStation, userPause, setUserPause, playerState }) {
 
   const controlCardColor = () => {
-
     // return white if station is not playing
     if (selectedStation?.call_sign !== station.call_sign) return "white"
     else {
@@ -16,14 +15,10 @@ export default function StationCard({ station, selectedStation, setSelectedStati
       // green while playing or paused
       if (playerState === "playing") return "#cefac8"
       if (playerState === "paused") return "#cefac8"
-
     }
   }
 
   function handleCardClick(e) {
-    // console.log(playing)
-    // console.log(station)
-
     // unload station if user clicks the currently playing card
     if (selectedStation === station) {
       if (userPause === false) {

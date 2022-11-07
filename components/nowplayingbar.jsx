@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 
-export default function NowPlayingBar({ selectedStation, userPause }) {
+export default function NowPlayingBar({ selectedStation, userPause, playerState }) {
   return (
     <View style={styles.npcontainer}>
       <View style={styles.contentcontainer}>
@@ -49,9 +49,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   stationlogo: {
-    width: 50,
-    height: 50,
+    width: 45,
+    height: 45,
     resizeMode: "contain",
     marginRight: 15,
+    borderRadius: 5,
   }
 });
