@@ -24,7 +24,10 @@ export default function App() {
   const [selectedStation, setSelectedStation] = useState(null);
   const [userPause, setUserPause] = useState(false);
   const [playerState, setPlayerState] = useState(null);
+  const [query, setQuery] = useState(null);
+  const [displayedStations, setDisplayedStations] = useState(stations);
 
+  // set up player and add listener to capture playing state
   useEffect(() => {
     TrackPlayer.setupPlayer().catch(() => {});
     TrackPlayer.addEventListener(Event.PlaybackState, (e) => {
@@ -48,7 +51,6 @@ export default function App() {
 
   useEffect(() => {
     if (selectedStation !== null) {
-      console.log("trigger");
       setUserPause(false);
       TrackPlayer.reset();
       TrackPlayer.add({ url: selectedStation.audio_url });
@@ -56,6 +58,23 @@ export default function App() {
       // TrackPlayer.getQueue().then((res) => console.log(res));
     }
   }, [selectedStation]);
+
+  useEffect(() => {
+    if (query.length === 0) setDisplayedStations(stations);
+    else {
+      setDisplayedStations(
+        stations.filter((station) => {
+          return (
+            station.call_sign.includes(query.toUpperCase()) ||
+            station.broadcast_frequency.toString().includes(query) ||
+            station.city.toLowerCase().includes(query.toLowerCase()) ||
+            station.state.toLowerCase().includes(query.toLowerCase()) ||
+            station.college_name.toLowerCase().includes(query.toLowerCase())
+          );
+        })
+      );
+    }
+  }, [query]);
 
   if (!fontsLoaded) {
     return null;
@@ -80,8 +99,9 @@ export default function App() {
             userPause={userPause}
           />
           <View style={styles.cardcontainer}>
-            {stations.map((station) => (
+            {displayedStations.map((station) => (
               <StationCard
+                key={station.id}
                 station={station}
                 selectedStation={selectedStation}
                 setSelectedStation={setSelectedStation}
@@ -98,6 +118,8 @@ export default function App() {
           setSelectorOpen={setSelectorOpen}
           setFaqOpen={setFaqOpen}
           setUserPause={setUserPause}
+          query={query}
+          setQuery={setQuery}
         />
       </LinearGradient>
     </View>

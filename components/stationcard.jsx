@@ -4,22 +4,20 @@ import TrackPlayer from "react-native-track-player";
 
 export default function StationCard({ station, selectedStation, setSelectedStation, userPause, setUserPause, playerState }) {
 
-  const greenIfPlaying = () => {
+  const controlCardColor = () => {
 
-    // return white if not playing
-    // if playing, return red if playerState = connecting
-    // return blue if playerState = buffering
-    // return #cefac8 if playerState = playing
-
+    // return white if station is not playing
     if (selectedStation?.call_sign !== station.call_sign) return "white"
     else {
-      console.log(playerState)
+      // light red while connecting
       if (playerState === "connecting") return "#db8a8a"
+      // gray while buffering
       if (playerState === "buffering" || playerState === "ready") return "#c9c9c9"
-      if(playerState === "playing") return "#cefac8"
-    }
+      // green while playing or paused
+      if (playerState === "playing") return "#cefac8"
+      if (playerState === "paused") return "#cefac8"
 
-    // return (selectedStation?.call_sign === station.call_sign) ? "#cefac8" : "white";
+    }
   }
 
   function handleCardClick(e) {
@@ -44,7 +42,7 @@ export default function StationCard({ station, selectedStation, setSelectedStati
   }
 
   return (
-    <Pressable style={[styles.card, {backgroundColor: greenIfPlaying()}]} onPress={handleCardClick}>
+    <Pressable style={[styles.card, {backgroundColor: controlCardColor()}]} onPress={handleCardClick}>
       <View style={styles.cardcontent}>
         <Image
           style={styles.logo}

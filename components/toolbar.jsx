@@ -1,10 +1,10 @@
-import { StyleSheet, View, Pressable } from "react-native";
+import { StyleSheet, View, Pressable, TextInput } from "react-native";
 import { Feather } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
 import TrackPlayer from "react-native-track-player";
 
-export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause }) {
+export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause, query, setQuery }) {
 
   function handlePause() {
     TrackPlayer.pause()
@@ -19,45 +19,55 @@ export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause }) {
   }
   
   return (
-    <View style={styles.headerbar}>
-      <View style={styles.toolbarcontainer}>
-        <Pressable onPress={() => setSelectorOpen(true)}>
-          <MaterialIcons name="dashboard-customize" size={24} color="white" />
-        </Pressable>
-        <Pressable onPress={handleShuffle}>
-          <Feather name="shuffle" size={24} color="white" />
-        </Pressable>
-        <Pressable onPress={handlePlay}>
-          <FontAwesome name="play" size={24} color="white" />
-        </Pressable>
-        <Pressable onPress={handlePause}>
-          <FontAwesome name="pause" size={24} color="white" />
-        </Pressable>
-        <Pressable onPress={() => setFaqOpen(true)}>
-          <FontAwesome name="question-circle" size={24} color="white" />
-        </Pressable>
+    <View style={styles.outercontainer}>
+      <View style={styles.searchbar}>
+        <TextInput
+          style={styles.input}
+          onChangeText={setQuery}
+          value={query}
+        />
+      </View>
+      <View style={styles.headerbar}>
+        <View style={styles.toolbarcontainer}>
+          <Pressable onPress={() => setSelectorOpen(true)}>
+            <FontAwesome name="search" size={24} color="white" />
+          </Pressable>
+          <Pressable onPress={handleShuffle}>
+            <Feather name="shuffle" size={24} color="white" />
+          </Pressable>
+          <Pressable onPress={handlePlay}>
+            <FontAwesome name="play" size={24} color="white" />
+          </Pressable>
+          <Pressable onPress={handlePause}>
+            <FontAwesome name="pause" size={24} color="white" />
+          </Pressable>
+          <Pressable onPress={() => setFaqOpen(true)}>
+            <FontAwesome name="question-circle" size={24} color="white" />
+          </Pressable>
+        </View>
       </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  headerbar: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: 60,
-    // alignSelf: "stretch",
-    backgroundColor: "#2e2e2e",
+  outercontainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -1 },
     shadowOpacity: 0.8,
     shadowRadius: 2,  
     elevation: 5,
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
+  },
+  headerbar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 60,
+    backgroundColor: "#2e2e2e",
   },
   toolbarcontainer: {
     display: "flex",
@@ -65,5 +75,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     width: "80%"
+  },
+  searchbar: {
+    height: 60,
+    backgroundColor: "white",
+  },
+  input: {
+    height: 40,
+    margin: 10,
+    borderWidth: 1,
+    padding: 8,
   }
 });
