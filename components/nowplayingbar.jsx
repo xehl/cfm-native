@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 
-export default function NowPlayingBar({ playing }) {
+export default function NowPlayingBar({ selectedStation, userPause }) {
   return (
     <View style={styles.npcontainer}>
       <View style={styles.contentcontainer}>
-        {playing ? <><Image
+        {selectedStation ? <><Image
           style={styles.stationlogo}
-          source={{ uri: playing.station_image }}
+          source={{ uri: selectedStation.station_image }}
         /></> : null}
         <Text style={styles.nowplayingtext}>
-        {playing ?
+        {selectedStation ?
           <>
-            Playing: {playing.call_sign} {playing.broadcast_frequency}
+              {userPause ? "Paused" : "Playing" }: {selectedStation.call_sign} {selectedStation.broadcast_frequency}
           </> : <>Choose a station to start listening!</>}
         </Text>
       </View>

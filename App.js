@@ -21,15 +21,20 @@ export default function App() {
   });
   const [selectorOpen, setSelectorOpen] = useState(false);
   const [faqOpen, setFaqOpen] = useState(false);
-  const [playing, setPlaying] = useState(null);
+  const [selectedStation, setSelectedStation] = useState(null);
   const [userPause, setUserPause] = useState(false);
+  const [buffering, setBuffering] = useState(false);
+  const [audioPlaying, setAudioPlaying] = useState(false);
 
   useEffect(() => {
-    TrackPlayer.setupPlayer()
-      .then(() => {
-        console.log("track player initialized");
-      })
-      .catch(() => {});
+    TrackPlayer.setupPlayer();
+    // .then(() => {
+    //   console.log("track player initialized");
+    // })
+    // .catch(() => {});
+    TrackPlayer.addEventListener(Event.PlaybackState, (e) => {
+      console.log(e);
+    });
   }, []);
 
   // // make array of tracks to feed to player
@@ -46,19 +51,15 @@ export default function App() {
   // TrackPlayer.play(TrackPlayer.getTrack(3));
 
   useEffect(() => {
-    if (playing !== null) {
+    if (selectedStation !== null) {
       console.log("trigger");
       setUserPause(false);
       TrackPlayer.reset();
-      TrackPlayer.add({ url: playing.audio_url });
+      TrackPlayer.add({ url: selectedStation.audio_url });
       TrackPlayer.play();
       // TrackPlayer.getQueue().then((res) => console.log(res));
     }
-
-    TrackPlayer.addEventListener(Event.PlaybackState, (e) => {
-      console.log(e);
-    });
-  }, [playing]);
+  }, [selectedStation]);
 
   if (!fontsLoaded) {
     return null;
@@ -78,13 +79,16 @@ export default function App() {
         <FaqModal faqOpen={faqOpen} setFaqOpen={setFaqOpen} />
         <ScrollView stickyHeaderIndices={[1]}>
           <Logo />
-          <NowPlayingBar playing={playing} />
+          <NowPlayingBar
+            selectedStation={selectedStation}
+            userPause={userPause}
+          />
           <View style={styles.cardcontainer}>
             {stations.map((station) => (
               <StationCard
                 station={station}
-                playing={playing}
-                setPlaying={setPlaying}
+                selectedStation={selectedStation}
+                setSelectedStation={setSelectedStation}
                 userPause={userPause}
                 setUserPause={setUserPause}
               />

@@ -2,10 +2,10 @@ import { StyleSheet, Text, Pressable, Image, View } from "react-native";
 import { Divider } from 'react-native-paper';
 import TrackPlayer from "react-native-track-player";
 
-export default function StationCard({ station, playing, setPlaying, userPause, setUserPause }) {
+export default function StationCard({ station, selectedStation, setSelectedStation, userPause, setUserPause }) {
 
   const greenIfPlaying = () => {
-    return (playing?.call_sign === station.call_sign) ? "#cefac8" : "white";
+    return (selectedStation?.call_sign === station.call_sign) ? "#cefac8" : "white";
   }
 
   function handleCardClick(e) {
@@ -13,11 +13,11 @@ export default function StationCard({ station, playing, setPlaying, userPause, s
     // console.log(station)
 
     // unload station if user clicks the currently playing card
-    if (playing === station) {
+    if (selectedStation === station) {
       if (userPause === false) {
         TrackPlayer.pause()
         setUserPause(true)
-        setPlaying(null)
+        setSelectedStation(null)
       }
       else {
         TrackPlayer.play()
@@ -25,7 +25,7 @@ export default function StationCard({ station, playing, setPlaying, userPause, s
       }
     }
     else {
-      setPlaying(station)
+      setSelectedStation(station)
     }
   }
 
