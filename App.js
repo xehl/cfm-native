@@ -118,6 +118,7 @@ export default function App() {
         <ToolBar
           setSelectorOpen={setSelectorOpen}
           setFaqOpen={setFaqOpen}
+          userPause={userPause}
           setUserPause={setUserPause}
           query={query}
           setQuery={setQuery}

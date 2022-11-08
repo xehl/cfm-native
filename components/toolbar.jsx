@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import TrackPlayer from "react-native-track-player";
 import { useRef, useState } from "react"
 
-export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause, query, setQuery }) {
+export default function ToolBar({ setSelectorOpen, setFaqOpen, userPause, setUserPause, query, setQuery }) {
 
   const [showSearchBar, setShowSearchBar] = useState(false)
   const animated = useRef(new Animated.Value(60)).current;
@@ -38,6 +38,7 @@ export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause, que
   };
 
   function handlePause() {
+    console.log(userPause + " handlePause")
     TrackPlayer.pause()
     setUserPause(true)
   }
@@ -70,10 +71,11 @@ export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause, que
           <Pressable onPress={handleShuffle}>
             <Feather name="shuffle" size={24} color="white" />
           </Pressable>
-          <Pressable onPress={handlePlay}>
-            <FontAwesome name="play" size={24} color="white" />
+          <Pressable onPress={handlePlay} style={{ display: userPause ? "flex" : "none" }}>
+          {/* <FontAwesome name="play" size={24} style={{ display: userPause ? "flex" : "none" }} color="white" /> */}
+          <FontAwesome name="play" size={24} color="white" />
           </Pressable>
-          <Pressable onPress={handlePause}>
+          <Pressable onPress={handlePause} style={{ display: userPause ? "none" : "flex" }}>
             <FontAwesome name="pause" size={24} color="white" />
           </Pressable>
           <Pressable onPress={() => setFaqOpen(true)}>
