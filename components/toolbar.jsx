@@ -1,19 +1,41 @@
-import { StyleSheet, View, Pressable, TextInput } from "react-native";
+import { StyleSheet, View, Pressable, TextInput, Animated } from "react-native";
 import { Feather } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
 import TrackPlayer from "react-native-track-player";
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause, query, setQuery }) {
 
   const [showSearchBar, setShowSearchBar] = useState(false)
+  const animated = useRef(new Animated.Value(60)).current;
+  const duration = 250;
 
-  const toggleSearchBar = () => {
-    console.log(showSearchBar)
-    if (showSearchBar)
+  function toggleSearchBar() {
+    if (showSearchBar) {
+      slideOut()
       setShowSearchBar(false)
-    else setShowSearchBar(true)
+    }
+    else {
+      slideIn()
+      setShowSearchBar(true)
+    }
   }
+
+  const slideIn = () => {
+    Animated.timing(animated, {
+      toValue: 0,
+      duration: duration,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const slideOut = () => {
+    Animated.timing(animated, {
+      toValue: 60,
+      duration: duration,
+      useNativeDriver: true,
+    }).start();
+  };
 
   function handlePause() {
     TrackPlayer.pause()
@@ -29,15 +51,16 @@ export default function ToolBar({ setSelectorOpen, setFaqOpen, setUserPause, que
   
   return (
     <View style={styles.outercontainer}>
-      <View style={[styles.searchbar, {display: showSearchBar ? "flex" : "none"}]}>
-      {/* <View style={[styles.searchbar]}> */}
+      <Animated.View style={[styles.searchbar, {transform: [{translateY: animated}]}]}>
         <TextInput
           placeholder="search"
+          placeholderTextColor = "#2e2e2e"
+          autoCapitalize="none"
           style={styles.input}
           onChangeText={setQuery}
           value={query}
         />
-      </View>
+      </Animated.View>
       <View style={styles.headerbar}>
         <View style={styles.toolbarcontainer}>
           {/* <Pressable onPress={() => setSelectorOpen(true)}> */}
@@ -89,14 +112,23 @@ const styles = StyleSheet.create({
     width: "80%"
   },
   searchbar: {
-    height: 60,
+    position: "absolute",
+    height: 110,
+    bottom: 0,
+    left: 0,
+    right: 0,
     backgroundColor: "#2e2e2e",
     borderBottomWidth: 1,
   },
   input: {
     height: 40,
-    margin: 10,
+    marginVertical: 10,
+    marginHorizontal: 30,
     borderWidth: 1,
-    padding: 8,
+    borderRadius: 5,
+    padding: 10,
+    backgroundColor: "white",
+    color: "#2e2e2e",
+    fontFamily: "ShareTechMono"
   }
 });
