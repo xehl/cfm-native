@@ -1,6 +1,18 @@
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 
-export default function NowPlayingBar({ selectedStation, userPause, playerState }) {
+export default function NowPlayingBar({ selectedStation, playerState }) {
+
+  const [displayText, setDisplayText] = useState("")
+
+  useEffect(() => {
+    console.log(playerState)
+    if (playerState === "connecting") setDisplayText("Connecting")
+    if (playerState === "playing") setDisplayText("Playing")
+    if (playerState === "buffering" || playerState === "ready") setDisplayText("Buffering")
+    if (playerState === "paused") setDisplayText("Paused")
+  }, [playerState])
+
   return (
     <View style={styles.npcontainer}>
       <View style={styles.contentcontainer}>
@@ -11,7 +23,7 @@ export default function NowPlayingBar({ selectedStation, userPause, playerState 
         <Text style={styles.nowplayingtext}>
         {selectedStation ?
           <>
-              {userPause ? "Paused" : "Playing" }: {selectedStation.call_sign} {selectedStation.broadcast_frequency}
+            { displayText }: {selectedStation.call_sign} {selectedStation.broadcast_frequency}
           </> : <>Choose a station to start listening!</>}
         </Text>
       </View>
@@ -21,7 +33,7 @@ export default function NowPlayingBar({ selectedStation, userPause, playerState 
 
 const styles = StyleSheet.create({
   npcontainer: {
-    height: 75,
+    height: 85,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#2e2e2e",
@@ -39,20 +51,20 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 5,
     width: "80%",
-    height: 60,
+    height: 70,
     paddingHorizontal: 20,
     paddingVertical: 5,
   },
   nowplayingtext: {
     fontFamily: "ShareTechMono",
-    fontSize: 16,
+    fontSize: 18,
     textAlign: "center",
   },
   stationlogo: {
-    width: 45,
-    height: 45,
+    width: 50,
+    height: 50,
     resizeMode: "contain",
-    marginRight: 15,
+    marginRight: 20,
     borderRadius: 5,
   }
 });

@@ -11,7 +11,7 @@ import FaqModal from "./components/faqmodal";
 import Logo from "./components/logo";
 import stations from "./stations";
 import TrackPlayer from "react-native-track-player";
-import { useTrackPlayerEvents, Event, State } from "react-native-track-player";
+import { Event } from "react-native-track-player";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -85,7 +85,6 @@ export default function App() {
           <Logo />
           <NowPlayingBar
             selectedStation={selectedStation}
-            userPause={userPause}
             playerState={playerState}
           />
           <View style={styles.cardcontainer}>
@@ -100,7 +99,7 @@ export default function App() {
                 playerState={playerState}
               />
             ))}
-            <AddNewButton setSelectorOpen={setSelectorOpen} />
+            {/* <AddNewButton setSelectorOpen={setSelectorOpen} /> */}
           </View>
         </ScrollView>
         <View style={styles.footerSpacer} />
