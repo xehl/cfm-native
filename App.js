@@ -36,19 +36,7 @@ export default function App() {
     });
   }, []);
 
-  // // make array of tracks to feed to player
-  // let tracks = [];
-  // stations.forEach((station) => {
-  //   trackObj = {
-  //     url: station.audio_url,
-  //     title: station.title,
-  //   };
-  //   tracks.push(trackObj);
-  // });
-  // TrackPlayer.add(tracks);
-  // // plays track at selected index
-  // TrackPlayer.play(TrackPlayer.getTrack(3));
-
+  // plays new station when selected station is changed
   useEffect(() => {
     if (selectedStation !== null) {
       setUserPause(false);
@@ -59,6 +47,7 @@ export default function App() {
     }
   }, [selectedStation]);
 
+  // filter cards when user types in search bar
   useEffect(() => {
     if (query === null || query.length === 0) setDisplayedStations(stations);
     else {
@@ -122,6 +111,7 @@ export default function App() {
           setUserPause={setUserPause}
           query={query}
           setQuery={setQuery}
+          setSelectedStation={setSelectedStation}
         />
       </LinearGradient>
     </View>

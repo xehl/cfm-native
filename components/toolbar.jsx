@@ -2,9 +2,10 @@ import { StyleSheet, View, Pressable, TextInput, Animated } from "react-native";
 import { Feather } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
 import TrackPlayer from "react-native-track-player";
+import stations from "../stations";
 import { useRef, useState } from "react"
 
-export default function ToolBar({ setSelectorOpen, setFaqOpen, userPause, setUserPause, query, setQuery }) {
+export default function ToolBar({ setFaqOpen, userPause, setUserPause, query, setQuery, setSelectedStation }) {
 
   const [showSearchBar, setShowSearchBar] = useState(false)
   const animated = useRef(new Animated.Value(60)).current;
@@ -38,7 +39,6 @@ export default function ToolBar({ setSelectorOpen, setFaqOpen, userPause, setUse
   };
 
   function handlePause() {
-    console.log(userPause + " handlePause")
     TrackPlayer.pause()
     setUserPause(true)
   }
@@ -48,6 +48,8 @@ export default function ToolBar({ setSelectorOpen, setFaqOpen, userPause, setUse
   }
   function handleShuffle() {
     console.log("shuffle")
+    let randomStation = stations[Math.floor(Math.random() * stations.length)]
+    setSelectedStation(randomStation)
   }
   
   return (
