@@ -98,13 +98,13 @@ const styles = StyleSheet.create({
   },
   questionText: {
     color: "white",
-    marginBottom: 15,
-    fontSize: 20,
+    marginBottom: 20,
+    fontSize: 18,
     fontFamily: "ShareTechMono",
   },
   answerText: {
     color: "#f0f0f0",
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: "ShareTechMono",
     borderBottomColor: "#b0b0b0",
     borderBottomWidth: 1

@@ -6,7 +6,6 @@ export default function NowPlayingBar({ selectedStation, playerState }) {
   const [displayText, setDisplayText] = useState("")
 
   useEffect(() => {
-    console.log(playerState)
     if (playerState === "connecting") setDisplayText("Connecting")
     if (playerState === "playing") setDisplayText("Playing")
     if (playerState === "buffering" || playerState === "ready") setDisplayText("Buffering")

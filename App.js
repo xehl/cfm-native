@@ -5,7 +5,6 @@ import { useFonts } from "expo-font";
 import StationCard from "./components/stationcard";
 import ToolBar from "./components/toolbar";
 import NowPlayingBar from "./components/nowplayingbar";
-import AddNewButton from "./components/addnewbutton";
 import SelectorModal from "./components/selectormodal";
 import FaqModal from "./components/faqmodal";
 import Logo from "./components/logo";
@@ -99,7 +98,6 @@ export default function App() {
                 playerState={playerState}
               />
             ))}
-            {/* <AddNewButton setSelectorOpen={setSelectorOpen} /> */}
           </View>
         </ScrollView>
         <View style={styles.footerSpacer} />

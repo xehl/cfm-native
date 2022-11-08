@@ -7,5 +7,4 @@ module.exports = async function () {
   TrackPlayer.addEventListener("remote-pause", () => {
     TrackPlayer.pause();
   });
-  // await TrackPlayer.setupPlayer();
 };
