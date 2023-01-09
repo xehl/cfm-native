@@ -1,5 +1,4 @@
 import { StyleSheet, Text, Pressable, Image, View } from "react-native";
-import { Divider } from 'react-native-paper';
 
 export default function ModalCard() {
 
